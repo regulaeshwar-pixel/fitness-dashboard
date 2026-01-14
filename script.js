@@ -223,11 +223,13 @@ function calculateTotalXP() {
 }
 
 function calculateWeeklyXP() {
+  const weekSet = new Set(weekDates);
   let weeklyXP = 0;
-  weekDates.forEach(dateStr => {
-    const dayData = allData.find(d => d.date === dateStr);
-    if (dayData && dayData.xp_earned) weeklyXP += dayData.xp_earned;
-  });
+  for (const dayData of allData) {
+    if (dayData.xp_earned && weekSet.has(dayData.date)) {
+      weeklyXP += dayData.xp_earned;
+    }
+  }
   return weeklyXP;
 }
 
