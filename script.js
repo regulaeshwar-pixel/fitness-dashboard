@@ -438,6 +438,10 @@ function updateNutritionUI() {
     const isDone = todayData?.[`meal_${meal}`] || false;
 
     if (card) {
+      const button = card.querySelector('.meal-toggle');
+      if (button) {
+        button.setAttribute('aria-pressed', isDone);
+      }
       if (isDone) {
         card.classList.add('completed');
         completed++;
