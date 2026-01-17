@@ -343,6 +343,20 @@ function updateWeeklyCalendar() {
     dayDot.className = `day-dot ${status}`;
     if (isToday) dayDot.classList.add('today');
 
+    // Accessibility & Tooltip
+    const statusTextMap = {
+      'full': 'Goal met',
+      'partial': 'Partial goal met',
+      'missed': 'Missed goal',
+      'future': 'Upcoming'
+    };
+    const humanStatus = statusTextMap[status] || 'Status unknown';
+    const fullLabel = `${dayLabels[index]}: ${humanStatus}`;
+
+    dayDot.setAttribute('aria-label', fullLabel);
+    dayDot.setAttribute('role', 'img');
+    dayDot.setAttribute('title', fullLabel);
+
     if (status === 'full') {
       dayDot.textContent = '✓';
     } else if (status === 'partial') {
