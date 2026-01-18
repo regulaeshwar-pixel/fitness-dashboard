@@ -415,9 +415,11 @@ function updatePostureUI() {
     if (element) {
       if (isDone) {
         element.classList.add('active');
+        element.setAttribute('aria-pressed', 'true');
         completed++;
       } else {
         element.classList.remove('active');
+        element.setAttribute('aria-pressed', 'false');
       }
     }
   });
@@ -438,11 +440,14 @@ function updateNutritionUI() {
     const isDone = todayData?.[`meal_${meal}`] || false;
 
     if (card) {
+      const button = card.querySelector('.meal-toggle');
       if (isDone) {
         card.classList.add('completed');
+        if (button) button.setAttribute('aria-pressed', 'true');
         completed++;
       } else {
         card.classList.remove('completed');
+        if (button) button.setAttribute('aria-pressed', 'false');
       }
     }
   });
