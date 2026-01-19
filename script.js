@@ -438,11 +438,20 @@ function updateNutritionUI() {
     const isDone = todayData?.[`meal_${meal}`] || false;
 
     if (card) {
+      const button = card.querySelector('.meal-toggle');
       if (isDone) {
         card.classList.add('completed');
+        if (button) {
+          button.textContent = 'Undo';
+          button.setAttribute('aria-pressed', 'true');
+        }
         completed++;
       } else {
         card.classList.remove('completed');
+        if (button) {
+          button.textContent = 'Done';
+          button.setAttribute('aria-pressed', 'false');
+        }
       }
     }
   });
