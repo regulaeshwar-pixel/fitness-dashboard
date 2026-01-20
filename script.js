@@ -431,6 +431,15 @@ function updatePostureUI() {
 
 function updateNutritionUI() {
   const meals = ['breakfast', 'snack', 'lunch', 'preworkout', 'postworkout', 'dinner', 'sleep'];
+  const mealNames = {
+    breakfast: 'Breakfast',
+    snack: 'Snack',
+    lunch: 'Lunch',
+    preworkout: 'Pre-workout',
+    postworkout: 'Post-workout',
+    dinner: 'Dinner',
+    sleep: 'Before sleep'
+  };
   let completed = 0;
 
   meals.forEach(meal => {
@@ -438,11 +447,22 @@ function updateNutritionUI() {
     const isDone = todayData?.[`meal_${meal}`] || false;
 
     if (card) {
+      const btn = card.querySelector('.meal-toggle');
       if (isDone) {
         card.classList.add('completed');
         completed++;
+        if (btn) {
+          btn.textContent = 'Undo';
+          btn.setAttribute('aria-pressed', 'true');
+          btn.setAttribute('aria-label', `Mark ${mealNames[meal]} as not done`);
+        }
       } else {
         card.classList.remove('completed');
+        if (btn) {
+          btn.textContent = 'Done';
+          btn.setAttribute('aria-pressed', 'false');
+          btn.setAttribute('aria-label', `Mark ${mealNames[meal]} as done`);
+        }
       }
     }
   });
