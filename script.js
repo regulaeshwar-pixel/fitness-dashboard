@@ -438,11 +438,24 @@ function updateNutritionUI() {
     const isDone = todayData?.[`meal_${meal}`] || false;
 
     if (card) {
+      const button = card.querySelector('.meal-toggle');
+      const mealName = card.querySelector('.meal-name') ? card.querySelector('.meal-name').textContent.trim() : 'Meal';
+
       if (isDone) {
         card.classList.add('completed');
         completed++;
+        if (button) {
+          button.textContent = 'Undo';
+          button.setAttribute('aria-pressed', 'true');
+          button.setAttribute('aria-label', `Mark ${mealName} as incomplete`);
+        }
       } else {
         card.classList.remove('completed');
+        if (button) {
+          button.textContent = 'Done';
+          button.setAttribute('aria-pressed', 'false');
+          button.setAttribute('aria-label', `Mark ${mealName} as complete`);
+        }
       }
     }
   });
